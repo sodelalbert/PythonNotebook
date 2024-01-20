@@ -1,23 +1,20 @@
+# Python Notebook
 
-# Python Notebook 
+Personal notes on various
 
-Personal notes on various 
-
-1. dataclasses
-2. enums
-3. decorators
-4. inheritance
-
+1. dataclasses ✅
+2. enums  ❌
+3. decorators ❌
+4. inheritance ❌
 
 ## PyCharm IDE Shortcuts
 
- 
-CMD + OPT + L - Reformat file
+`CMD + OPT + L` - Reformat file  
+`CMD + OPT + R` - Execute current file  
+`CTRL + D` - Debug  
 
-CMD + OPT + R - Execute current file
-CTRL + D      - Debug
+## Usefull plugins
 
-
-## Usefull plugins 
-* AsciDoc - markdown
-
+- [**AsciiDoc**](https://plugins.jetbrains.com/plugin/7391-asciidoc) - markdown live preview engine
+- [**Black**](https://black.readthedocs.io/en/stable/integrations/editors.html] ) - coherent code formatting
+- [**mypy**](https://mypy-lang.org/) - static typing checker (optional for python)

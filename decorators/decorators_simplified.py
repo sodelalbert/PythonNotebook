@@ -7,6 +7,7 @@ Decorator objects adds behaviour to component. They can also add behaviour to ot
 References:
     - https://youtu.be/QH5fw9kxDQA
 """
+import functools
 import logging
 from math import sqrt
 from time import perf_counter
@@ -20,14 +21,6 @@ def is_prime(number: int) -> bool:
         if number % element == 0:
             return False
         return True
-
-
-def count_prime_numbers(upper_bound: int) -> int:
-    count = 0
-    for number in range(upper_bound):
-        if is_prime(number):
-            count += 1
-    return count
 
 
 """
@@ -47,49 +40,75 @@ def benchmark(upper_bound: int) -> int:
     return value
 
 
-"""
-benchmark_wrapper accepts any callable (function),
-
-Callable[..., Any]
-... - means that that function which we are passing will be accepted with any argument
-Any - is return value of passed function which can be anything   
-
-wrapper function defined internally takes  
-"""
-
-
 def benchmark_wrapper(func: Callable[..., Any]) -> Callable[..., Any]:
-    def wrapper(*args: Any, **kwargs: Any) -> Any:
-        start_time = perf_counter()
+    """
+    Proper definition of decorator:
+    benchmark_wrapper accepts any callable (function),
+    Callable[..., Any]
+    ... - means that that function which we are passing will be accepted with any argument
+    Any - is return value of passed function which can be anything
+    wrapper function defined internally takes
+    """
 
+    def wrapper(*args: Any, **kwargs: Any) -> Any:
+        # additional methods wrapped around function call
+        start_time = perf_counter()
+        # function arguments are passed effectively to passed argument
         value = func(*args, **kwargs)
 
         end_time = perf_counter()
         run_time = end_time - start_time
         logging.info(f"Execution of {func.__name__} took {run_time:.2f}")
+
         return value
-    # 16:06
+
     return wrapper
 
 
+logger = logging.getLogger("my_app")
+
+
+def with_logging(cust_logger: logging.Logger):
+    """
+    to pass arguments to decorator we need to add another level of function wrapping
+    """
+
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
+        @functools.wraps(func)
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
+            cust_logger.info(f" Calling {func.__name__}")
+            value = func(*args, **kwargs)
+            cust_logger.info(f"Execution done of {func.__name__}")
+            return value
+
+        return wrapper
+
+    return decorator
+
+
+@with_logging(logger)
 @benchmark_wrapper
-def print_text(text: str) -> None:
-    print(text)
+def count_prime_numbers(upper_bound: int) -> int:
+    count = 0
+    for number in range(upper_bound):
+        if is_prime(number):
+            count += 1
+    return count
 
 
 def main() -> None:
     logging.basicConfig(level=logging.INFO)
 
     # Specific function wraparound
-    value = benchmark(100000)
-    logging.info(f"number of primes: {value}")
+    # value = benchmark(100000)
+    # logging.info(f"number of primes: {value}")
 
     # Wrapper method accepting any function
-    wrapper_fn = benchmark_wrapper(count_prime_numbers)
-    wrapper_value = wrapper_fn(100000)
-    logging.info(f"number of primes: {wrapper_value}")
+    # wrapper_fn = benchmark_wrapper(count_prime_numbers)
+    # wrapper_value = wrapper_fn(100000)
+    # logging.info(f"number of primes: {wrapper_value}")
 
-    print_text("asa akira")
+    print(count_prime_numbers(10000))
 
 
 if __name__ == "__main__":

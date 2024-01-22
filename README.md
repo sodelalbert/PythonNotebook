@@ -4,8 +4,14 @@ Personal notes on various
 
 1. dataclasses ✅
 2. enums  ❌
-3. decorators ❌
-4. inheritance ❌
+3. decorators ✅ 
+_Note: maybe more thought should be put into it..._
+4. oop  
+4.1 class method  ✅
+4.2 property  ✅
+4.3 Inheritance vs composition with abc ✅   
+4.4 inheritance ❌
+5. functions ❌
 
 ## PyCharm IDE Shortcuts
 

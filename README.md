@@ -3,13 +3,26 @@
 Personal notes on various topics related to Python programming. 
 
 
+
+### Python 
 - [ ] Python Data Types 
 - [ ] Object Oriented Programming
 - [ ] Lambdas
 - [ ] Decorrators
+- [ ] Working with files: XML, Yaml, JSON
+
+### SQL
+- [ ] SQL syntax
+- [ ] SQL using python
+
+### Data Science
+- [ ] numpy 
+- [ ] pandas
+- [ ] 
 
 
-- [ ] Parsing XML, Yaml, JSON
+## Testing
+- [ ] pytest 
 - [ ] Requests
 - [ ] Selenium
 - [ ] SQL interactions using Python
@@ -21,10 +34,22 @@ Personal notes on various topics related to Python programming.
 `CMD + OPT + R` - Execute current file  
 `CTRL + D` - Debug  
 
-## VS Code Shortcuts 
+## Jupyter Notebooks Shortcuts 
+
+`CMD + Enter` - Run code block
+`Shift + Enter` - Run all code blocks
+
+`Esc` - Command mode
+`y` - Code block
+`m` - Markdown block
+`a` - Add cell after current  
+`b` - Add cell before current
+`d d` - Remoce cell
 
 
+## VS Code
 
+`OPT + Up/Down` - Move line up down
 
 ## Usefull plugins
 
